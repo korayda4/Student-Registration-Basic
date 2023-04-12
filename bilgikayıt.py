@@ -22,10 +22,13 @@ while True:
 
     elif islem.lower() == "öğrenciler" :                                                     #Eğer işlem öğrencilerse çalıştır
 
-        for ogrenci in ogrenciler:                                                          #ogrenciler listesindeki her değer için ogrenciyi değiştir ve str atanan değişkenleri formatla yazdır
+        if len(ogrenciler) != 0:
+            for ogrenci in ogrenciler:                                                          #ogrenciler listesindeki her değer için ogrenciyi değiştir ve str atanan değişkenleri formatla yazdır
+                print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
 
-            print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
-        
+        elif len(ogrenciler) == 0:
+            print("Kayıtlı Öğrenci Yok")       
+
         devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    #Devam etmek istiyormu diye sor
 
         if devam.lower() != "e":                                       #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
@@ -36,19 +39,23 @@ while True:
     elif islem.lower() == "öğrenci sorgu" :                  #eğer işlem öğrenci sorguysa çalıştır
 
         numara = input("Öğrencinin numarasını giriniz: ")   #aranan öğrencinin numarasını iste
+        if len(ogrenciler) == 0:
+            print("Öğrenci Kayıtlı Değil!")
 
-        for ogrenci in ogrenciler:                          #ogrenciler listesindeki her değer için ogrenciyi değiştir
+        elif numara == ogrenci["numara"]:    
+            for ogrenci in ogrenciler:                          #ogrenciler listesindeki her değer için ogrenciyi değiştir
+              print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
+              
+        else:
+            print("Öğrenci Kayıtlı Değil!")
+              
+                   
+        
+                 
 
-            if numara == ogrenci["numara"]:                 #değişen ogrenci içerisindeki "numara" nın değişkeni istediğimiz değişkene eşit mi diye sor
+        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    #Devam etmek istiyormu diye sor
 
-                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
-            
-            else:
-             print("Öğrenci bulunamadı.")
-
-            devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    #Devam etmek istiyormu diye sor
-
-            if devam.lower() != "e":                                           #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        if devam.lower() != "e":                                           #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
                print("Görüşmek Üzere...")
                break
 
