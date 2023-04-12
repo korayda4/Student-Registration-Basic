@@ -1,61 +1,78 @@
 ogrenciler = []
 while True:
-    islem = input("\nİşlem türü seçiniz:\n1)Öğrenci Kayıt\n2)Öğrenciler\n3)öğrenci Sorgu\n-->")   #İşlem türünü seçtir
+    #İşlem türünü seçtir
+    islem = input("\nİşlem türü seçiniz:\n1)Öğrenci Kayıt\n2)Öğrenciler\n3)öğrenci Sorgu\n-->")   
 
-    if islem.lower() == "öğrenci kayıt" :                                          #Eğer işlem öğrenci kayıt ise değişkenleri girmesini iste
+    #Eğer işlem öğrenci kayıt ise değişkenleri girmesini iste
+    if islem.lower() == "öğrenci kayıt":  
 
-        ad = input("İsim: ")              #Ad değişkeni
-        soyad = input("Soyisim: ")        #SoyAd değişkeni
-        yas = input("Yaş: ")              #yas değişkeni
-        bölüm = input("Bölüm: ")          #bölüm değişkeni
-        numara = input("Okul Numarası: ") #numara değişkeni
+        #İstediğimiz Değişkenler
+        ad = input("İsim: ")             
+        soyad = input("Soyisim: ")        
+        yas = input("Yaş: ")              
+        bölüm = input("Bölüm: ")          
+        numara = input("Okul Numarası: ") 
+        cinsiyet = input("Cinsiyeti: ")
 
-        ogrenci = {"ad": ad, "soyad": soyad, "yas": yas, "bölüm": bölüm, "numara": numara}  #ogrenci listesinde diziye isim ver ve her isime değişken ata
+        #ogrenci listesinde diziye isim ver ve her isime değişken ata
+        ogrenci = {"ad": ad, "soyad": soyad, "yas": yas, "bölüm": bölüm, "numara": numara,"cinsiyet":cinsiyet}  
 
-        ogrenciler.append(ogrenci)                                                          #ogrencideki bilgileri tek tek ogrenciler listesine kayıt et
+        #ogrencideki bilgileri tek tek ogrenciler listesine kayıt et
+        ogrenciler.append(ogrenci) 
 
-        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")                         #Devam etmek istiyormu diye sor
+        #Devam etmek istiyormu diye sor
+        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")                         
 
-        if devam.lower() != "e":                                                            #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et,
+        #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        if devam.lower() != "e":                        
             print("Görüşmek Üzere...")
             break
 
-    elif islem.lower() == "öğrenciler" :                                                     #Eğer işlem öğrencilerse çalıştır
+    #Eğer işlem öğrencilerse çalıştır
+    elif islem.lower() == "öğrenciler" :                                                     
 
         if len(ogrenciler) != 0:
-            for ogrenci in ogrenciler:                                                          #ogrenciler listesindeki her değer için ogrenciyi değiştir ve str atanan değişkenleri formatla yazdır
-                print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
+            for ogrenci in ogrenciler: 
 
+                #ogrenciler listesindeki her değer için ogrenciyi değiştir ve str atanan değişkenleri formatla yazdır
+                print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+ 
+        #ogrenci karakter uzunluğu 0 ise öğrenci kayıdı yoktur de
         elif len(ogrenciler) == 0:
             print("Kayıtlı Öğrenci Yok")       
+        
+        #Devam etmek istiyormu diye sor
+        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    
 
-        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    #Devam etmek istiyormu diye sor
-
-        if devam.lower() != "e":                                       #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        if devam.lower() != "e":                   
               print("Görüşmek Üzere...")
               break
         
+    #eğer işlem öğrenci sorguysa çalıştır
+    elif islem.lower() == "öğrenci sorgu" :   
 
-    elif islem.lower() == "öğrenci sorgu" :                  #eğer işlem öğrenci sorguysa çalıştır
+        #aranan öğrencinin numarasını iste
+        numara = input("Öğrencinin numarasını giriniz: ")  
 
-        numara = input("Öğrencinin numarasını giriniz: ")   #aranan öğrencinin numarasını iste
+        #ogrenciker karakter uzunluğu 0 ise öğrenci kayıdı yoktur de
         if len(ogrenciler) == 0:
             print("Öğrenci Kayıtlı Değil!")
 
-        elif numara == ogrenci["numara"]:    
-            for ogrenci in ogrenciler:                          #ogrenciler listesindeki her değer için ogrenciyi değiştir
-              print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"]))
+        #ogrenciler listesindeki her değer için ogrenciyi değiştir
+        elif len(ogrenciler) != 0:   
+            for ogrenci in ogrenciler:
+                if numara in ogrenci["numara"]:                          
+                    print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
               
         else:
             print("Öğrenci Kayıtlı Değil!")
-              
-                   
-        
-                 
+                       
+        #Devam etmek istiyormu diye sor
+        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    
 
-        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    #Devam etmek istiyormu diye sor
-
-        if devam.lower() != "e":                                           #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        if devam.lower() != "e":                        
                print("Görüşmek Üzere...")
                break
 
