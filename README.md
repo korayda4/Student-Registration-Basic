@@ -1,5 +1,4 @@
 # Student-Registration-Basic
-A simple system that will be able to enroll students while the code is running - View the student list and check the information you want from students
-Adding records to txt file will be added on a simple student registration and inquiry system
+It is a simple student registration system. It is a system that can enroll students, view the list of all students, see the information of a specific student and change the information of the registered student while the code is running in it.
 
 NEW:student information renewal system
