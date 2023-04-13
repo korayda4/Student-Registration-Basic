@@ -2,7 +2,7 @@ ogrenciler = []
 bölümler = ["yazılım","hukuk","muhasebe","dijitaliçerik","matbaa"]
 while True:
     #İşlem türünü seçtir
-    islem = input("\nİşlem türü seçiniz:\n1)Öğrenci Kayıt\n2)Öğrenciler\n3)öğrenci Sorgu\n-->")   
+    islem = input("\nİşlem türü seçiniz:\n1)Öğrenci Kayıt\n2)Öğrenciler\n3)öğrenci Sorgu\n4)öğrenci bilgi yenile\n-->")   
 
     #Eğer işlem öğrenci kayıt ise değişkenleri girmesini iste
     if islem.lower() == "öğrenci kayıt":  
@@ -115,8 +115,89 @@ while True:
         if devam.lower() != "e":                        
                print("Görüşmek Üzere...")
                break
+   
+    #işlem Öğrenci bilgi yenile ise çalıştır
+    elif islem.lower() == "öğrenci bilgi yenile" :
+        if len(ogrenciler) == 0:
+            print("Öğrenci Kayıtlı Değil!")
+        elif len(ogrenciler) != 0:
+            numara = input("Öğrencinin numarasını giriniz: ") 
+            
+            #kayıtlı ogrenciler llistesinden her seferinde birini al ve girilen numara ile ogrencinin içindeki numara eşit olana kadar dene  
+            for ogrenci in ogrenciler:
+                if numara in ogrenci["numara"]:
+                    değiştir = input("Değiştirmek istediğiniz bilgiyi seçiniz:\n1)İsim\n2)Soyisim\n3)Yaş\n4)bölüm\n5)Okul Numarası\n6)Cinsiyet\n-->")
+                    
+                    #değiştirlimek istenen bilgiyi sor ve girilen bilgiye göre değişkeni değiştir
+                    if değiştir == "isim":                    
+                       ogrenci["ad"] = input("Yeni bilgiyi giriniz").upper()
+                       while len(ogrenci["ad"])<=2:
+                         print("Lütfen isim giriniz")
+                         ogrenci["ad"] = input("İsim: ").upper()
+                       while not ogrenci["ad"].isalpha():
+                        print("Lütfen isim giriniz")
+                        ogrenci["ad"] = input("İsim: ").upper()
+                       print("Başarıyla değiştirildi")
 
-        
+                    elif değiştir == "soyisim":
+                       ogrenci["soyad"] = input("Yeni bilgiyi giriniz").upper()
+                       while len(ogrenci["ad"])<=2:
+                         print("Lütfen soyisim giriniz")
+                         ogrenci["soyad"] = input("Soisim: ").upper()
+                       while not ogrenci["soyad"].isalpha():
+                        print("Lütfen soyisim giriniz")
+                        ogrenci["soyad"] = input("Soyisim: ").upper()
+                       print("Başarıyla değiştirildi")
+
+                    elif değiştir == "yaş":
+                        ogrenci["yas"] = input("Yeni bilgiyi giriniz").upper()
+                        while ogrenci["ad"]<=2:
+                         print("Lütfen Yaş giriniz")
+                         ogrenci["yas"] = input("Yaş: ").upper()
+                        while not ogrenci["yas"].isdigit():
+                         print("Lütfen yaş giriniz")
+                         ogrenci["yas"] = input("Yaş: ").upper()
+                        print("Başarıyla değiştirildi")
+                    
+                    elif değiştir == "bölüm":
+                        ogrenci["bölüm"] = input("Yeni bilgiyi giriniz").upper()
+                        while bölüm.lower() not in bölümler:
+                            print("Lütfen doğru bölüm girin")
+                            bölüm = input("Bölüm: ").upper()
+                        print("Başarıyla değiştirildi")
+                        
+                    elif değiştir == "okul numarası":
+                        ogrenci["numara"] = input("Yeni bilgiyi giriniz").upper()
+                        while ogrenci["numara"]<=2:
+                         print("Lütfen Numara giriniz")
+                         ogrenci["numara"] = input("Numara: ").upper()
+                        while not ogrenci["numara"].isdigit():
+                         print("Lütfen yaş giriniz")
+                         ogrenci["numara"] = input("Numara: ").upper()
+                        print("Başarıyla değiştirildi")
+
+                    elif değiştir == "cinsiyet":
+                        ogrenci["cinsiyet"] = input("Yeni bilgiyi giriniz").upper()
+                        while not (cinsiyet.lower()=="erkek" or cinsiyet.lower()=="kadın"):
+                            print("Lütfen Cinsiyeti Erkek veya Kadın olarak belirleyin")
+                            ogrenci["cinsiyet"] = input("Cinsiyeti: ").upper()
+                            
+                    else:
+                        print("Yanlış işlem girildi")
+
+
+
+        devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):")    
+
+        #Büyük E küçük e ayrımını düzelt ve e ye eşit değilse sonlandır eşitse devam et
+        if devam.lower() != "e":                        
+               print("Görüşmek Üzere...")
+               break            
+
+                    
+        else:
+            print("Öğrenci Kayıtlı Değil!")
+
 
     else:
         print("Yanlış İşlem girdiniz lütfen dikkat edin!")    
