@@ -1,10 +1,11 @@
 import os
+import datetime
 ogrenciler = []
 
 def kaydet(ogrenciler):
     with open("ogrencibilgi.txt", "w") as dosya:
         for ogrenci in ogrenciler:
-            dosya.write("{}, {}, {}, {}, {}, {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+            dosya.write("{}, {}, {}, {}, {}, {}, {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
 
 def yukle():
     ogrenciler = []
@@ -12,15 +13,15 @@ def yukle():
         with open("ogrencibilgi.txt", "r") as dosya:
             for satir in dosya:
                 satir = satir.strip()
-                ad, soyad, yas, bölüm, numara,cinsiyet = satir.split(", ")
-                ogrenci = {"ad": ad.upper(), "soyad": soyad.upper(), "yas": yas, "bölüm": bölüm.upper(), "numara": numara,"cinsiyet":cinsiyet.upper()}
+                ad, soyad, yas, bölüm, numara,cinsiyet,kayittarihi = satir.split(", ")
+                ogrenci = {"ad": ad.upper(), "soyad": soyad.upper(), "yas": yas, "bölüm": bölüm.upper(), "numara": numara,"cinsiyet":cinsiyet.upper(),"tarih": kayittarihi}
                 ogrenciler.append(ogrenci)
     return ogrenciler
 
 
 
 
-
+kayittarihi = ""
 ogrenciler = yukle()
 bölümler = ["YAZILIM","HUKUK","MUHASEBE","MÜZIK","MATBAA","ÖGRETMENLIK","PSIKOLOGLUK","BILGISAYAR MÜHENDISLIGI"]
 while True:
@@ -31,7 +32,7 @@ while True:
         cinsiyet = input("Listelenecek cinsiyeti giriniz:\n-->")
         for ogrenci in ogrenciler:
             if cinsiyet.upper() in ogrenci["cinsiyet"]:
-                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
 
         devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):\n-->")                         
 
@@ -84,12 +85,12 @@ while True:
             soyad = input("Soyisim:\n--> ")
 
         yas = input("Yaş:\n--> ")
-        while int(yas)<=17:
-            print("Yaş en az 18 olabilir")
-            yas = input("Yaş:\n--> ") 
         while not yas.isdigit():
             print("Lütfen Sayı giriniz")
             yas = input("Yaş:\n--> ")
+        while int(yas)<=17:
+            print("Yaş en az 18 olabilir")
+            yas = input("Yaş:\n--> ") 
 
         bölüm = input("Bölüm:\n--> ").upper()
         while bölüm.upper() not in bölümler:
@@ -117,9 +118,9 @@ while True:
         while not (cinsiyet.lower()=="erkek" or cinsiyet.lower()=="kadın"):
             print("Lütfen Cinsiyeti Erkek veya Kadın olarak belirleyin")
             cinsiyet = input("Cinsiyeti:\n--> ")
-
+        kayittarihi = datetime.datetime.now().strftime(format='%m/%d/%y') + f" Saat: {str(datetime.datetime.now().hour)}:{str(datetime.datetime.now().minute)}"
         #ogrenci listesinde diziye isim ver ve her isime değişken ata
-        ogrenci = {"ad": ad.upper(), "soyad": soyad.upper(), "yas": yas, "bölüm": bölüm.upper(), "numara": numara,"cinsiyet":cinsiyet.upper()}  
+        ogrenci = {"ad": ad.upper(), "soyad": soyad.upper(), "yas": yas, "bölüm": bölüm.upper(), "numara": numara,"cinsiyet":cinsiyet.upper(),"tarih":kayittarihi}  
 
         #ogrencideki bilgileri tek tek ogrenciler listesine kayıt et
         ogrenciler.append(ogrenci)
@@ -143,7 +144,7 @@ while True:
             for ogrenci in ogrenciler: 
 
                 #ogrenciler listesindeki her değer için ogrenciyi değiştir ve str atanan değişkenleri formatla yazdır
-                print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+                print("\nAdı: {} \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\nKayıt Tarihi: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
  
         #ogrenci karakter uzunluğu 0 ise öğrenci kayıdı yoktur de
         elif len(ogrenciler) == 0:
@@ -172,7 +173,7 @@ while True:
         elif len(ogrenciler) != 0:   
             for ogrenci in ogrenciler:
                 if numara in ogrenci["numara"]:                          
-                    print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+                    print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\nKayıt Tarihi: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
               
         else:
             print("Öğrenci Kayıtlı Değil!")
