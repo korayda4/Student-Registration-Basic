@@ -2,11 +2,13 @@ import os
 import datetime
 ogrenciler = []
 
+#TXT dosyasına ram'de tutulan bilgilerin kayıdı için fonksiyon
 def kaydet(ogrenciler):
     with open("ogrencibilgi.txt", "w") as dosya:
         for ogrenci in ogrenciler:
             dosya.write("{}, {}, {}, {}, {}, {}, {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
 
+#Kayıtlı olan TXT dosyasını yükelemesi için fonksiyon
 def yukle():
     ogrenciler = []
     if os.path.exists("ogrencibilgi.txt"):
@@ -32,7 +34,7 @@ while True:
         cinsiyet = input("Listelenecek cinsiyeti giriniz:\n-->")
         for ogrenci in ogrenciler:
             if cinsiyet.upper() in ogrenci["cinsiyet"]:
-                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
+                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\nKayıt Tarihi: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
 
         devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):\n-->")                         
 
@@ -51,7 +53,7 @@ while True:
         bölüm = input("Listelenecek bölümü giriniz:\n-->")
         for ogrenci in ogrenciler:
             if bölüm.upper() in ogrenci["bölüm"]:
-                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"]))
+                print("\nAdı: {}  \nSoyadı: {} \nYaşı: {} \nBölümü: {} \nOkul Numarası: {}\nCinsiyeti: {}\nKayıt Tarihi: {}\n".format(ogrenci["ad"], ogrenci["soyad"], ogrenci["yas"], ogrenci["bölüm"], ogrenci["numara"],ogrenci["cinsiyet"],ogrenci["tarih"]))
 
         devam = input("Tekrar İşlem yapmak istiyor musunuz?(E/H):\n-->")                         
 
@@ -102,14 +104,12 @@ while True:
             bölüm = input("Bölüm:\n--> ")
 
         numara = input("Okul Numarası:\n--> ")
-        i = 0
-        while int(i) < 1:
-              for j in ogrenciler:
+        
+        for j in ogrenciler:
                   if numara in j["numara"]:
                     print("Bu numara başka öğrenciye atanmış")
                     numara = input("Okul Numarası:\n--> ")
-                  elif numara not in j["numara"]:
-                      i = 2 
+                  
         while not numara.isdigit():
             print("Lütfen Sayı giriniz")
             numara = input("Okul Numarası:\n--> ")
@@ -118,7 +118,10 @@ while True:
         while not (cinsiyet.lower()=="erkek" or cinsiyet.lower()=="kadın"):
             print("Lütfen Cinsiyeti Erkek veya Kadın olarak belirleyin")
             cinsiyet = input("Cinsiyeti:\n--> ")
+
+            #Tarihi ve saati kaydet
         kayittarihi = datetime.datetime.now().strftime(format='%m/%d/%y') + f" Saat: {str(datetime.datetime.now().hour)}:{str(datetime.datetime.now().minute)}"
+
         #ogrenci listesinde diziye isim ver ve her isime değişken ata
         ogrenci = {"ad": ad.upper(), "soyad": soyad.upper(), "yas": yas, "bölüm": bölüm.upper(), "numara": numara,"cinsiyet":cinsiyet.upper(),"tarih":kayittarihi}  
 
