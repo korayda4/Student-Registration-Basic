@@ -90,10 +90,13 @@ while True:
     
     #Eğer işlem cinsiyete göre listele ise çalıştır
     if islem.lower() == "cinsiyete göre listele" or islem.lower() == "6":
-        cinsiyet = input("Listelenecek cinsiyeti giriniz:\n-->")
+
+        cinsiyet = input("Listelenecek cinsiyeti giriniz:\n-->").upper()
         aranacakdeger = "cinsiyet"
+
         for ogrenci in ogrenciler:
-            okutucu(cinsiyet.upper(),aranacakdeger)
+            if cinsiyet in ogrenci[aranacakdeger]:
+             okutucu(cinsiyet.upper(),aranacakdeger)
 
         if tekrar() == True:
             continue
@@ -186,7 +189,7 @@ while True:
     elif islem.lower() == "öğrenci sorgu" or islem.lower() == "3":   
 
         #aranan öğrencinin numarasını iste
-        ara = input("Öğrencinin numarasını veya Adını giriniz:\n--> ") 
+        ara = input("Öğrencinin numarasını giriniz:\n--> ") 
         aranacakdeger = "numara" 
 
         #ogrenciker karakter uzunluğu 0 ise öğrenci kayıdı yoktur de
@@ -196,9 +199,9 @@ while True:
         #ogrenciler listesindeki her değer için ogrenciyi değiştir
         elif len(ogrenciler) != 0:   
             for ogrenci in ogrenciler:
-                okutucu(ara.upper(),aranacakdeger)
-                aranacakdeger = "ad"
-                okutucu(ara.upper(),aranacakdeger)
+                if ara in ogrenci[aranacakdeger]:
+                 okutucu(ara.upper(),aranacakdeger)
+                
                        
         if tekrar() == True:
             continue
